@@ -26,7 +26,7 @@ namespace SmartLog.Tests
     }
 
     [Test]
-    public async Task XmkInsertRequestTest()
+    public void XmkInsertRequestTest()
     {
       var xmlSerializer = new XmlSerializer(typeof(SmartLogRequest));
       using var reader1 = new StringReader(text.insert_request);
@@ -41,7 +41,7 @@ namespace SmartLog.Tests
     }
 
     [Test]
-    public async Task JsonInsertRequestTest()
+    public void JsonInsertRequestTest()
     {
       var xmlSerializer = new XmlSerializer(typeof(SmartLogRequest));
       using var reader1 = new StringReader(text.insert_request);
