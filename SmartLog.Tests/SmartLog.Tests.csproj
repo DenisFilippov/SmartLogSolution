@@ -19,4 +19,19 @@
     <ProjectReference Include="..\SmartLog.Mapping\SmartLog.Mapping.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="text.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>text.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="text.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>text.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>

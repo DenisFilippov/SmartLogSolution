@@ -1,0 +1,60 @@
+﻿<SmartLogRequest>
+	<Logs>
+		<Log>
+			<UId>9297766D-6317-4589-8B95-C8D468DFB78B</UId>
+			<MethodName>Execute1</MethodName>
+			<Type>Info</Type>
+			<CreateDate>2021-01-01T21:00:00</CreateDate>
+			<Message>Message 1</Message>
+		</Log>
+		<Log>
+			<UId>7407C74A-C826-41C0-8491-178D04B02202</UId>
+			<MethodName>Execute2</MethodName>
+			<Type>Warning</Type>
+			<CreateDate>2021-01-01T21:01:00</CreateDate>
+			<Message>Message 2</Message>
+			<CustomAttributes>
+				<CustomAttribute>
+					<Name>Name1</Name>
+					<Value>Value 1</Value>
+				</CustomAttribute>
+				<CustomAttribute>
+					<Name>Name2</Name>
+					<Value>Value 2</Value>
+				</CustomAttribute>
+			</CustomAttributes>
+		</Log>
+		<Log>
+			<UId>3CBD622D-A4EE-45EA-85A3-A031E7AB2BB1</UId>
+			<MethodName>Execute3</MethodName>
+			<Type>Error</Type>
+			<CreateDate>2021-01-01T21:03:00</CreateDate>
+			<Message>Message 3</Message>
+			<CustomAttributes>
+				<CustomAttribute>
+					<Name>Name1</Name>
+					<Value>Value 1</Value>
+				</CustomAttribute>
+				<CustomAttribute>
+					<Name>Name2</Name>
+					<Value>Value 2</Value>
+				</CustomAttribute>
+			</CustomAttributes>
+			<LogDatas>
+				<LogData>
+					<Key>Key1</Key>
+					<Value><![CDATA[some stuff]]></Value>
+				</LogData>
+			</LogDatas>
+			<Children>
+				<Log>
+					<UId>5B3F387E-73D4-46E7-B27F-71C27F447532</UId>
+					<MethodName>Execute3</MethodName>
+					<Type>Error</Type>
+					<CreateDate>2021-01-01T21:03:00</CreateDate>
+					<Message>Message 3</Message>
+				</Log>
+			</Children>
+		</Log>
+	</Logs>
+</SmartLogRequest>
