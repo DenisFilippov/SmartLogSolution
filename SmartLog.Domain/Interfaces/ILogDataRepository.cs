@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SmartLog.Domain.Interfaces
 {
-  public interface ILogDataRepository
+  public interface ILogDataRepository : IRepository
   {
     Task<IEnumerable<LogDataDto>> GetAsync(IEnumerable<long> logIds);
 

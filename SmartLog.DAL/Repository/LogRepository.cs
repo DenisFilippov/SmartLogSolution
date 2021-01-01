@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Dapper;
@@ -27,10 +23,8 @@ namespace SmartLog.DAL.Repository
     public async Task<IEnumerable<LogDto>> GetAsync(DateTime initial, DateTime final)
     {
       await using var connection = _connector.GetConnection();
-      var entities = await connection.QueryAsync<LogEntity>(
-        "select [logs_id], [log_guid], [parent], [create_date], [type], [method_name], [message] " +
-        "from [logs] where [create_date] >= @initial and " +
-        "[create_date] <= @final order by [create_date]", new { initial, final });
+      var entities = await connection.QueryAsync<LogEntity>(Sql.SelectLogs, 
+        new { pInitial = initial, pFinal = final });
 
       return _mapper.Map<IEnumerable<LogDto>>(entities);
     }
@@ -44,10 +38,10 @@ namespace SmartLog.DAL.Repository
       {
         try
         {
-          totalCount += await connection.ExecuteAsync(
-            "insert into logs ([create_date], [log_guid], [message], [method_name], [parent], [type]) " +
-            "values(:pCreate_date, :pLog_guid, :pMessage, :pMethod_name, :pParent, :pType)", 
-            new { value.CreateDate, value.Uid, value.Message, value.MethodName, value.Parent, value.Type });
+          totalCount += await connection.ExecuteAsync(Sql.InsertLogs, 
+            new { pCreateDate = value.CreateDate, pLogGuid = value.Uid, pMessage = value.Message, 
+              pMethodName = value.MethodName, pParent = value.Parent, pType = value.Type },
+            transaction);
         }
         catch (Exception)
         {
@@ -58,6 +52,12 @@ namespace SmartLog.DAL.Repository
       transaction.Commit();
 
       return totalCount;
+    }
+
+    public async Task ClearAsync()
+    {
+      await using var connection = _connector.GetConnection();
+      await connection.ExecuteAsync(Sql.DeleteLogs);
     }
   }
 }

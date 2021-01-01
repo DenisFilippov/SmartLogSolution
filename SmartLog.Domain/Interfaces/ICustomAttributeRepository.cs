@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace SmartLog.Domain.Interfaces
 {
-  public interface ICustomAttributeRepository
+  public interface ICustomAttributeRepository : IRepository
   {
     Task<IEnumerable<CustomAttributeDto>> GetAsync(IEnumerable<long> logIds);
 

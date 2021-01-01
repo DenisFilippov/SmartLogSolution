@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Dapper;
@@ -28,8 +24,7 @@ namespace SmartLog.DAL.Repository
     {
       await using var connection = _connector.GetConnection();
       var entities = await connection.QueryAsync<LogDataEntity>(
-        "select [log_data_id], [logs_id], [data_key], [data_value] from [log_data] " +
-        $"where[logs_id] in ({string.Join(',', logIds)})");
+        string.Format(Sql.SelectLogData, string.Join(',', logIds)));
 
       return _mapper.Map<IEnumerable<LogDataDto>>(entities);
     }
@@ -37,16 +32,15 @@ namespace SmartLog.DAL.Repository
     public async Task<int> InsertAsync(IEnumerable<LogDataDto> values)
     {
       await using var connection = _connector.GetConnection();
-      using var transaction = connection.BeginTransaction();
+      await using var transaction = connection.BeginTransaction();
       var totalCount = 0;
       foreach (var value in values)
       {
         try
         {
-          totalCount += await connection.ExecuteAsync(
-            "insert into log_data ([logs_id], [data_key], [data_value]) " + 
-            "values(:pLogsId, :pDataKey, :pDataValue)", 
-            new { value.LogsId, value.Key, value.Value });
+          totalCount += await connection.ExecuteAsync(Sql.InsertLogData, 
+            new { pLogsId = value.LogsId, pDataKey = value.Key, pDataValue = value.Value }, 
+            transaction);
         }
         catch (Exception)
         {
@@ -57,6 +51,12 @@ namespace SmartLog.DAL.Repository
       transaction.Commit();
 
       return totalCount;
+    }
+
+    public async Task ClearAsync()
+    {
+      await using var connection = _connector.GetConnection();
+      await connection.ExecuteAsync(Sql.DeleteLogData);
     }
   }
 }

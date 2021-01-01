@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SmartLog.Domain.Interfaces
 {
-  public interface ILogRepository
+  public interface ILogRepository : IRepository
   {
     Task<IEnumerable<LogDto>> GetAsync(DateTime initial, DateTime final);
 
