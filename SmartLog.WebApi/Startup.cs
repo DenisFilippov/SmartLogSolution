@@ -19,21 +19,25 @@ namespace SmartLog.WebApi
 
     public void ConfigureServices(IServiceCollection services)
     {
-      services.AddMvcCore(options => options.EnableEndpointRouting = false);
+      services
+        .AddMvcCore(options => options.EnableEndpointRouting = false)
+        .AddXmlSerializerFormatters()
+        ;
+
       services
         .AddConfig(_config)
         .AddMapper()
         .AddConnector()
         .AddRepositories()
+        .AddSevices()
+        .AddFluentMapper()
+        .AddMemoryCache()
         ;
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
-      if (env.IsDevelopment())
-      {
-        app.UseDeveloperExceptionPage();
-      }
+      if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
 
       app.UseRouting();
       app.UseMvc();

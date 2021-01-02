@@ -12,7 +12,7 @@ namespace SmartLog.Domain
   {
     private readonly string _connectionString;
 
-    public Connector(string connectionString )
+    public Connector(string connectionString)
     {
       _connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
     }

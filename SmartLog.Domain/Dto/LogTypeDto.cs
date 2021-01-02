@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace SmartLog.Domain.Dto
 {
-  public class ConnectionDto
+  public class LogTypeDto
   {
-    public string ConnectionString { get; set; }
+    public byte Id { get; set; }
+
+    public string Name { get; set; }
   }
 }

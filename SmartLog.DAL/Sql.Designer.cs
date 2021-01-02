@@ -145,5 +145,15 @@ namespace SmartLog.DAL {
                 return ResourceManager.GetString("SelectLogs", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to select [log_types_id], [name] from [log_types]
+        ///  order by [log_types_id].
+        /// </summary>
+        internal static string SelectLogTypes {
+            get {
+                return ResourceManager.GetString("SelectLogTypes", resourceCulture);
+            }
+        }
     }
 }

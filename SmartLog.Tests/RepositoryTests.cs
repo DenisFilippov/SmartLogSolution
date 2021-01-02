@@ -136,14 +136,13 @@ namespace SmartLog.Tests
       _customAttributeRepository = new CustomAttributeRepository(_connector, _mapper);
       var entityMaps = FluentMapper.EntityMaps;
       if (entityMaps.Count == 0)
-      {
-        FluentMapper.Initialize(config =>
+        FluentMapper.Initialize(c =>
         {
-          config.AddMap(new LogEntityMap());
-          config.AddMap(new LogDataEntityMap());
-          config.AddMap(new CustomAttributeEntityMap());
+          c.AddMap(new LogEntityMap());
+          c.AddMap(new LogDataEntityMap());
+          c.AddMap(new CustomAttributeEntityMap());
+          c.AddMap(new LogTypeEntityMap());
         });
-      }
     }
 
     [Test]

@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using SmartLog.Domain;
+using SmartLog.Domain.Dto;
 using SmartLog.Domain.Interfaces;
 
 namespace SmartLog.WebApi.Controllers
@@ -12,45 +11,59 @@ namespace SmartLog.WebApi.Controllers
   [ApiController]
   public class LogController : ControllerBase
   {
-    public LogController()
-    {
+    private readonly ILogService _logService;
 
+    public LogController(ILogService logService)
+    {
+      _logService = logService ?? throw new ArgumentNullException(nameof(logService));
     }
 
     [HttpGet("service-info")]
-    public ActionResult ServiceInfo()
+    public IActionResult ServiceInfo()
     {
       return Ok($"Ping {DateTime.Now.ToLongTimeString()}");
     }
 
     [HttpGet("debug")]
-    public ActionResult Debug(string uid, string methodName, string createDate, string message)
+    public async Task<IActionResult> Debug(string uid, string methodName, string createDate, string message)
     {
-      return Ok();
+      var result = await _logService.CreateLogAsync(LogTypes.DEBUG, uid, methodName, createDate, message);
+      return Ok(result);
     }
 
     [HttpGet("info")]
-    public ActionResult Info(string uid, string methodName, string createDate, string message)
+    public async Task<IActionResult> Info(string uid, string methodName, string createDate, string message)
     {
-      return Ok();
+      var result = await _logService.CreateLogAsync(LogTypes.INFO, uid, methodName, createDate, message);
+      return Ok(result);
     }
 
     [HttpGet("warning")]
-    public ActionResult Warning(string uid, string methodName, string createDate, string message)
+    public async Task<IActionResult> Warning(string uid, string methodName, string createDate, string message)
     {
-      return Ok();
+      var result = await _logService.CreateLogAsync(LogTypes.WARNING, uid, methodName, createDate, message);
+      return Ok(result);
     }
 
     [HttpGet("error")]
-    public ActionResult Error(string uid, string methodName, string createDate, string message)
+    public async Task<IActionResult> Error(string uid, string methodName, string createDate, string message)
     {
-      return Ok();
+      var result = await _logService.CreateLogAsync(LogTypes.ERROR, uid, methodName, createDate, message);
+      return Ok(result);
     }
 
     [HttpGet("critical")]
-    public ActionResult Critical(string uid, string methodName, string createDate, string message)
+    public async Task<IActionResult> Critical(string uid, string methodName, string createDate, string message)
     {
-      return Ok();
+      var result = await _logService.CreateLogAsync(LogTypes.CRITICAL, uid, methodName, createDate, message);
+      return Ok(result);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Log(SmartLogRequest request)
+    {
+      var result = await _logService.CreateLogAsync(request);
+      return Ok(result);
     }
   }
 }

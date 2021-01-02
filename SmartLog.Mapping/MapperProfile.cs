@@ -30,6 +30,11 @@ namespace SmartLog.Mapping
         .ForMember("Name", opt => opt.MapFrom(src => src.Name))
         .ForMember("Value", opt => opt.MapFrom(src => src.Value))
         ;
+
+      CreateMap<LogTypeEntity, LogTypeDto>()
+        .ForMember("Id", opt => opt.MapFrom(src => src.Id))
+        .ForMember("Name", opt => opt.MapFrom(src => src.Name))
+        ;
     }
   }
 }

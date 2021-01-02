@@ -23,8 +23,8 @@ namespace SmartLog.DAL.Repository
     public async Task<IEnumerable<LogDto>> GetAsync(DateTime initial, DateTime final)
     {
       await using var connection = _connector.GetConnection();
-      var entities = await connection.QueryAsync<LogEntity>(Sql.SelectLogs, 
-        new { pInitial = initial, pFinal = final });
+      var entities = await connection.QueryAsync<LogEntity>(Sql.SelectLogs,
+        new {pInitial = initial, pFinal = final});
 
       return _mapper.Map<IEnumerable<LogDto>>(entities);
     }
@@ -32,15 +32,17 @@ namespace SmartLog.DAL.Repository
     public async Task<int> InsertAsync(IEnumerable<LogDto> values)
     {
       await using var connection = _connector.GetConnection();
-      using var transaction = connection.BeginTransaction();
+      await using var transaction = connection.BeginTransaction();
       var totalCount = 0;
       foreach (var value in values)
-      {
         try
         {
-          totalCount += await connection.ExecuteAsync(Sql.InsertLogs, 
-            new { pCreateDate = value.CreateDate, pLogGuid = value.Uid, pMessage = value.Message, 
-              pMethodName = value.MethodName, pParent = value.Parent, pType = value.Type },
+          totalCount += await connection.ExecuteAsync(Sql.InsertLogs,
+            new
+            {
+              pCreateDate = value.CreateDate, pLogGuid = value.Uid, pMessage = value.Message,
+              pMethodName = value.MethodName, pParent = value.Parent, pType = value.Type
+            },
             transaction);
         }
         catch (Exception)
@@ -48,7 +50,7 @@ namespace SmartLog.DAL.Repository
           transaction.Rollback();
           throw;
         }
-      }
+
       transaction.Commit();
 
       return totalCount;

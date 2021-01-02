@@ -8,6 +8,7 @@
     <ProjectReference Include="..\SmartLog.DAL\SmartLog.DAL.csproj" />
     <ProjectReference Include="..\SmartLog.Domain\SmartLog.Domain.csproj" />
     <ProjectReference Include="..\SmartLog.Mapping\SmartLog.Mapping.csproj" />
+    <ProjectReference Include="..\SmartLog.Service\SmartLog.Service.csproj" />
   </ItemGroup>
 
   <ItemGroup>

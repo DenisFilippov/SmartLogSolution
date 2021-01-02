@@ -35,11 +35,10 @@ namespace SmartLog.DAL.Repository
       await using var transaction = connection.BeginTransaction();
       var totalCount = 0;
       foreach (var value in values)
-      {
         try
         {
           totalCount += await connection.ExecuteAsync(Sql.InsertCustomAttributes,
-            new { pLogsId = value.LogsId, pName = value.Name, pValue = value.Value }, 
+            new {pLogsId = value.LogsId, pName = value.Name, pValue = value.Value},
             transaction);
         }
         catch (Exception)
@@ -47,7 +46,7 @@ namespace SmartLog.DAL.Repository
           transaction.Rollback();
           throw;
         }
-      }
+
       transaction.Commit();
 
       return totalCount;

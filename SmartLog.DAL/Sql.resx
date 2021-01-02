@@ -149,4 +149,8 @@ values(@pCreateDate, @pLogGuid, @pMessage, @pMethodName, @pParent, @pType)</valu
 where [create_date] &gt;= @pInitial and [create_date] &lt;= @pFinal
 order by [create_date]</value>
   </data>
+  <data name="SelectLogTypes" xml:space="preserve">
+    <value>select [log_types_id], [name] from [log_types]
+  order by [log_types_id]</value>
+  </data>
 </root>
