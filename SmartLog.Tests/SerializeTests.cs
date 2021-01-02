@@ -1,18 +1,7 @@
-using AutoMapper;
-using Dapper.FluentMap;
 using NUnit.Framework;
-using SmartLog.DAL.Map;
-using SmartLog.DAL.Repository;
-using SmartLog.Domain;
 using SmartLog.Domain.Dto;
-using SmartLog.Domain.Interfaces;
-using SmartLog.Mapping;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 
