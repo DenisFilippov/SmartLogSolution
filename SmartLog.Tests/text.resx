@@ -193,4 +193,9 @@
 	&lt;/Error&gt;
 &lt;/SmartLogResponse&gt;</value>
   </data>
+  <data name="response_info" xml:space="preserve">
+    <value>&lt;SmartLogInfoResponse&gt;
+	&lt;Version&gt;1.0.0.0&lt;/Version&gt;
+&lt;/SmartLogInfoResponse&gt;</value>
+  </data>
 </root>

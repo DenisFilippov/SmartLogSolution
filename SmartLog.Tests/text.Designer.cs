@@ -111,5 +111,16 @@ namespace SmartLog.Tests {
                 return ResourceManager.GetString("response_404", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;SmartLogInfoResponse&gt;
+        ///	&lt;Version&gt;1.0.0.0&lt;/Version&gt;
+        ///&lt;/SmartLogInfoResponse&gt;.
+        /// </summary>
+        internal static string response_info {
+            get {
+                return ResourceManager.GetString("response_info", resourceCulture);
+            }
+        }
     }
 }
