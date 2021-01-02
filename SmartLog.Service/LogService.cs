@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Reflection;
 using System.Threading.Tasks;
 using SmartLog.Domain.Dto;
 using SmartLog.Domain.Interfaces;
@@ -15,7 +14,7 @@ namespace SmartLog.Service
     private readonly ICustomAttributeRepository _customAttributeRepository;
     private readonly ILogTypeRepository _logTypeRepository;
 
-    private SmartLogResponse CreateResponse(int code, Guid? uid = null, string message = null)
+    private static SmartLogResponse CreateResponse(int code, Guid? uid = null, string message = null)
     {
       return uid == null
         ? new SmartLogResponse
@@ -74,6 +73,14 @@ namespace SmartLog.Service
     public async Task<SmartLogResponse> CreateLogAsync(SmartLogRequest request)
     {
       throw new NotImplementedException();
+    }
+
+    public SmartLogInfoResponse GetServiceInfo()
+    {
+      var version = Assembly.GetCallingAssembly().GetName().Version;
+      return (version != null)
+        ? new SmartLogInfoResponse {Version = version.ToString()}
+        : new SmartLogInfoResponse {Version = string.Empty};
     }
   }
 }

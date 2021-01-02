@@ -9,5 +9,7 @@ namespace SmartLog.Domain.Interfaces
       string message);
 
     Task<SmartLogResponse> CreateLogAsync(SmartLogRequest request);
+
+    SmartLogInfoResponse GetServiceInfo();
   }
 }

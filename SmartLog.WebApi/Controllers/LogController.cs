@@ -21,7 +21,8 @@ namespace SmartLog.WebApi.Controllers
     [HttpGet("service-info")]
     public IActionResult ServiceInfo()
     {
-      return Ok($"Ping {DateTime.Now.ToLongTimeString()}");
+      var result = _logService.GetServiceInfo();
+      return Ok(result);
     }
 
     [HttpGet("debug")]
