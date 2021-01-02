@@ -11,7 +11,7 @@ namespace SmartLog.Domain.Dto
     public int Code { get; set; }
 
     [XmlElement("Error", IsNullable = false)]
-    [JsonPropertyName("error")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public ErrorDto Error { get; set; }
   }
 }
