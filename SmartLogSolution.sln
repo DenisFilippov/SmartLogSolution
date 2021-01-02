@@ -9,7 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartLog.DAL", "SmartLog.DA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartLog.Tests", "SmartLog.Tests\SmartLog.Tests.csproj", "{266A4891-4D4A-4AFC-BDA2-2EC7A2B459FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLog.Mapping", "SmartLog.Mapping\SmartLog.Mapping.csproj", "{FBE3FB5C-8AC7-486F-AC04-A9BB7ED33D31}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartLog.Mapping", "SmartLog.Mapping\SmartLog.Mapping.csproj", "{FBE3FB5C-8AC7-486F-AC04-A9BB7ED33D31}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartLog.WebApi", "SmartLog.WebApi\SmartLog.WebApi.csproj", "{C7B2860A-DC4A-4B9A-95DB-7F11F1B19AC5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLog.Service", "SmartLog.Service\SmartLog.Service.csproj", "{BDE99F88-1F8A-4FA0-94E5-1E41FD20577E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{FBE3FB5C-8AC7-486F-AC04-A9BB7ED33D31}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FBE3FB5C-8AC7-486F-AC04-A9BB7ED33D31}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FBE3FB5C-8AC7-486F-AC04-A9BB7ED33D31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7B2860A-DC4A-4B9A-95DB-7F11F1B19AC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7B2860A-DC4A-4B9A-95DB-7F11F1B19AC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7B2860A-DC4A-4B9A-95DB-7F11F1B19AC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7B2860A-DC4A-4B9A-95DB-7F11F1B19AC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDE99F88-1F8A-4FA0-94E5-1E41FD20577E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDE99F88-1F8A-4FA0-94E5-1E41FD20577E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDE99F88-1F8A-4FA0-94E5-1E41FD20577E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDE99F88-1F8A-4FA0-94E5-1E41FD20577E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
