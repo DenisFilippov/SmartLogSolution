@@ -85,5 +85,31 @@ namespace SmartLog.Tests {
                 return ResourceManager.GetString("insert_request", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;SmartLogResponse&gt;
+        ///	&lt;Code&gt;200&lt;/Code&gt;
+        ///&lt;/SmartLogResponse&gt;.
+        /// </summary>
+        internal static string response_200 {
+            get {
+                return ResourceManager.GetString("response_200", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;SmartLogResponse&gt;
+        ///	&lt;Code&gt;404&lt;/Code&gt;
+        ///	&lt;Error&gt;
+        ///		&lt;UId&gt;51AB89D6-09DF-4C28-A0FF-061D0A8A6C45&lt;/UId&gt;
+        ///		&lt;Message&gt;Not found.&lt;/Message&gt;
+        ///	&lt;/Error&gt;
+        ///&lt;/SmartLogResponse&gt;.
+        /// </summary>
+        internal static string response_404 {
+            get {
+                return ResourceManager.GetString("response_404", resourceCulture);
+            }
+        }
     }
 }

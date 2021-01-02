@@ -26,7 +26,7 @@ namespace SmartLog.Tests
     }
 
     [Test]
-    public void XmkInsertRequestTest()
+    public void XmlInsertRequestTest()
     {
       var xmlSerializer = new XmlSerializer(typeof(SmartLogRequest));
       using var reader1 = new StringReader(text.insert_request);
@@ -54,6 +54,72 @@ namespace SmartLog.Tests
       var serialized = sb.ToString();
       using var reader2 = new StringReader(serialized);
       var requestObject2 = (SmartLogRequest) jsonSerializer.Deserialize(reader2, typeof(SmartLogRequest));
+
+      Assert.Pass("Тест пройден.");
+    }
+
+    [Test]
+    public void XmlResponse200Test()
+    {
+      var xmlSerializer = new XmlSerializer(typeof(SmartLogResponse));
+      using var reader1 = new StringReader(text.response_200);
+      var responseObject1 = (SmartLogResponse)xmlSerializer.Deserialize(reader1);
+      var sb = new StringBuilder(4096);
+      var writer = new StringWriter(sb);
+      xmlSerializer.Serialize(writer, responseObject1);
+      var serialized = sb.ToString();
+      using var reader2 = new StringReader(serialized);
+      var responseObject2 = (SmartLogResponse)xmlSerializer.Deserialize(reader2);
+      Assert.Pass("Тест пройден.");
+    }
+
+    [Test]
+    public void XmlResponse404Test()
+    {
+      var xmlSerializer = new XmlSerializer(typeof(SmartLogResponse));
+      using var reader1 = new StringReader(text.response_404);
+      var responseObject1 = (SmartLogResponse)xmlSerializer.Deserialize(reader1);
+      var sb = new StringBuilder(4096);
+      var writer = new StringWriter(sb);
+      xmlSerializer.Serialize(writer, responseObject1);
+      var serialized = sb.ToString();
+      using var reader2 = new StringReader(serialized);
+      var reponseObject2 = (SmartLogResponse)xmlSerializer.Deserialize(reader2);
+      Assert.Pass("Тест пройден.");
+    }
+
+    [Test]
+    public void JsonResponse200Test()
+    {
+      var xmlSerializer = new XmlSerializer(typeof(SmartLogResponse));
+      using var reader1 = new StringReader(text.response_200);
+      var responseObject1 = (SmartLogResponse)xmlSerializer.Deserialize(reader1);
+
+      var jsonSerializer = new JsonSerializer() { Formatting = Formatting.Indented };
+      var sb = new StringBuilder(4096);
+      var writer = new StringWriter(sb);
+      jsonSerializer.Serialize(writer, responseObject1);
+      var serialized = sb.ToString();
+      using var reader2 = new StringReader(serialized);
+      var responseObject2 = (SmartLogResponse)jsonSerializer.Deserialize(reader2, typeof(SmartLogResponse));
+
+      Assert.Pass("Тест пройден.");
+    }
+
+    [Test]
+    public void JsonResponse404Test()
+    {
+      var xmlSerializer = new XmlSerializer(typeof(SmartLogResponse));
+      using var reader1 = new StringReader(text.response_404);
+      var responseObject1 = (SmartLogResponse)xmlSerializer.Deserialize(reader1);
+
+      var jsonSerializer = new JsonSerializer() { Formatting = Formatting.Indented };
+      var sb = new StringBuilder(4096);
+      var writer = new StringWriter(sb);
+      jsonSerializer.Serialize(writer, responseObject1);
+      var serialized = sb.ToString();
+      using var reader2 = new StringReader(serialized);
+      var responseObject2 = (SmartLogResponse)jsonSerializer.Deserialize(reader2, typeof(SmartLogResponse));
 
       Assert.Pass("Тест пройден.");
     }

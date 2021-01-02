@@ -179,4 +179,18 @@
 	&lt;/Logs&gt;
 &lt;/SmartLogRequest&gt;</value>
   </data>
+  <data name="response_200" xml:space="preserve">
+    <value>&lt;SmartLogResponse&gt;
+	&lt;Code&gt;200&lt;/Code&gt;
+&lt;/SmartLogResponse&gt;</value>
+  </data>
+  <data name="response_404" xml:space="preserve">
+    <value>&lt;SmartLogResponse&gt;
+	&lt;Code&gt;404&lt;/Code&gt;
+	&lt;Error&gt;
+		&lt;UId&gt;51AB89D6-09DF-4C28-A0FF-061D0A8A6C45&lt;/UId&gt;
+		&lt;Message&gt;Not found.&lt;/Message&gt;
+	&lt;/Error&gt;
+&lt;/SmartLogResponse&gt;</value>
+  </data>
 </root>
