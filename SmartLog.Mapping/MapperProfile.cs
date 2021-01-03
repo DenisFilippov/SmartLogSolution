@@ -17,13 +17,6 @@ namespace SmartLog.Mapping
         .ForMember("Type", opt => opt.MapFrom(src => src.Type))
         ;
 
-      CreateMap<LogDataEntity, LogDataDto>()
-        .ForMember("Id", opt => opt.MapFrom(src => src.Id))
-        .ForMember("LogsId", opt => opt.MapFrom(src => src.LogsId))
-        .ForMember("Key", opt => opt.MapFrom(src => src.Key))
-        .ForMember("Value", opt => opt.MapFrom(src => src.Value))
-        ;
-
       CreateMap<CustomAttributeEntity, CustomAttributeDto>()
         .ForMember("Id", opt => opt.MapFrom(src => src.Id))
         .ForMember("LogsId", opt => opt.MapFrom(src => src.LogsId))

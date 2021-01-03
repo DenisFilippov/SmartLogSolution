@@ -70,15 +70,6 @@ namespace SmartLog.DAL {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to delete from [log_data].
-        /// </summary>
-        internal static string DeleteLogData {
-            get {
-                return ResourceManager.GetString("DeleteLogData", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to delete from [logs].
         /// </summary>
         internal static string DeleteLogs {
@@ -98,16 +89,6 @@ namespace SmartLog.DAL {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to insert into [log_data] ([logs_id], [data_key], [data_value])
-        ///values(@pLogsId, @pDataKey, @pDataValue).
-        /// </summary>
-        internal static string InsertLogData {
-            get {
-                return ResourceManager.GetString("InsertLogData", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to insert into [logs] ([create_date], [log_guid], [message], [method_name], [parent], [type])
         ///values(@pCreateDate, @pLogGuid, @pMessage, @pMethodName, @pParent, @pType).
         /// </summary>
@@ -123,15 +104,6 @@ namespace SmartLog.DAL {
         internal static string SelectCustomAttributes {
             get {
                 return ResourceManager.GetString("SelectCustomAttributes", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to select [log_data_id], [logs_id], [data_key], [data_value] from [log_data] where[logs_id] in ({0}).
-        /// </summary>
-        internal static string SelectLogData {
-            get {
-                return ResourceManager.GetString("SelectLogData", resourceCulture);
             }
         }
         

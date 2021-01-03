@@ -17,7 +17,7 @@ namespace SmartLog.WebApi.Externals
   {
     public static IServiceCollection AddConfig(this IServiceCollection services, IConfiguration config)
     {
-      services.AddSingleton<IConfigDto>(r => new ConfigDto
+      services.AddSingleton<IConfigDto>(_ => new ConfigDto
       {
         Connection = new ConnectionDto
         {
@@ -30,7 +30,7 @@ namespace SmartLog.WebApi.Externals
 
     public static IServiceCollection AddMapper(this IServiceCollection services)
     {
-      services.AddSingleton<IMapper>(r =>
+      services.AddSingleton<IMapper>(_ =>
       {
         var config = new MapperConfiguration(cfg => { cfg.AddProfile(new MapperProfile()); });
         return new Mapper(config);
@@ -44,7 +44,6 @@ namespace SmartLog.WebApi.Externals
       FluentMapper.Initialize(c =>
       {
         c.AddMap(new LogEntityMap());
-        c.AddMap(new LogDataEntityMap());
         c.AddMap(new CustomAttributeEntityMap());
         c.AddMap(new LogTypeEntityMap());
       });
@@ -71,12 +70,6 @@ namespace SmartLog.WebApi.Externals
         var mapper = r.GetService<IMapper>();
         return new LogRepository(connector, mapper);
       });
-      services.AddScoped<ILogDataRepository>(r =>
-      {
-        var connector = r.GetService<IConnector>();
-        var mapper = r.GetService<IMapper>();
-        return new LogDataRepository(connector, mapper);
-      });
       services.AddScoped<ICustomAttributeRepository>(r =>
       {
         var connector = r.GetService<IConnector>();
@@ -99,10 +92,9 @@ namespace SmartLog.WebApi.Externals
       services.AddScoped<ILogService>(r =>
       {
         var logRepository = r.GetService<ILogRepository>();
-        var logDataRepository = r.GetService<ILogDataRepository>();
         var customAttributeRepository = r.GetService<ICustomAttributeRepository>();
         var logTypeRepository = r.GetService<ILogTypeRepository>();
-        return new LogService(logRepository, logDataRepository, customAttributeRepository, logTypeRepository);
+        return new LogService(logRepository, customAttributeRepository, logTypeRepository);
       });
 
       return services;

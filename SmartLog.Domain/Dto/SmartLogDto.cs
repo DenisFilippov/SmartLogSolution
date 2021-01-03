@@ -35,11 +35,6 @@ namespace SmartLog.Domain.Dto
     [JsonPropertyName("customAttribute")]
     public SmartCustomAttributeDto[] CustomAttributes { get; set; }
 
-    [XmlArray("LogDatas")]
-    [XmlArrayItem("LogData")]
-    [JsonPropertyName("logData")]
-    public SmartLogDataDto[] LogDatas { get; set; }
-
     [XmlArray("Children")]
     [XmlArrayItem("Log")]
     [JsonPropertyName("log")]

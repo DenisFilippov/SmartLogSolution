@@ -22,7 +22,6 @@ namespace SmartLog.Tests
     private IConnector _connector;
     private IMapper _mapper;
     private ILogRepository _logRepository;
-    private ILogDataRepository _logDataRepository;
     private ICustomAttributeRepository _customAttributeRepository;
 
     private LogDto[] Get1LogDtoArray()
@@ -75,31 +74,6 @@ namespace SmartLog.Tests
       return result;
     }
 
-    private LogDataDto[] Get3LogDataDtoArray(long logsId)
-    {
-      var result = new LogDataDto[3];
-      result[0] = new LogDataDto
-      {
-        LogsId = logsId,
-        Key = "key1",
-        Value = new byte[] {0x01, 0x02, 0x03}
-      };
-      result[1] = new LogDataDto
-      {
-        LogsId = logsId,
-        Key = "key2",
-        Value = new byte[] {0x11, 0x12, 0x13}
-      };
-      result[2] = new LogDataDto
-      {
-        LogsId = logsId,
-        Key = "key3",
-        Value = new byte[] {0x21, 0x22, 0x23}
-      };
-
-      return result;
-    }
-
     private CustomAttributeDto[] Get3CustomAttributeDtoArray(long logsId)
     {
       var result = new CustomAttributeDto[3];
@@ -132,14 +106,12 @@ namespace SmartLog.Tests
 
       _mapper = new Mapper(config);
       _logRepository = new LogRepository(_connector, _mapper);
-      _logDataRepository = new LogDataRepository(_connector, _mapper);
       _customAttributeRepository = new CustomAttributeRepository(_connector, _mapper);
       var entityMaps = FluentMapper.EntityMaps;
       if (entityMaps.Count == 0)
         FluentMapper.Initialize(c =>
         {
           c.AddMap(new LogEntityMap());
-          c.AddMap(new LogDataEntityMap());
           c.AddMap(new CustomAttributeEntityMap());
           c.AddMap(new LogTypeEntityMap());
         });
@@ -162,33 +134,6 @@ namespace SmartLog.Tests
       if (methodName != "execute3")
         throw new InvalidOperationException($"Неверное значение MethodName ({methodName}).");
       await _logRepository.ClearAsync();
-      Assert.Pass("Тест пройден.");
-    }
-
-    [Test]
-    public async Task LogDataTestAsync()
-    {
-      await _logRepository.ClearAsync();
-      await _logDataRepository.ClearAsync();
-
-      var baseNow = DateTime.Now;
-      var values1 = Get1LogDtoArray();
-      await _logRepository.InsertAsync(values1);
-      var log = (await _logRepository.GetAsync(baseNow, DateTime.Now)).FirstOrDefault();
-      if (log == null)
-        throw new InvalidOperationException("Количество добавленных записей в [logs] неверное.");
-      var values2 = Get3LogDataDtoArray(log.Id);
-      var result1 = await _logDataRepository.InsertAsync(values2);
-      if (result1 != 3)
-        throw new InvalidOperationException($"Количество добавленных записей неверное ({result1}).");
-      var result2 = await _logDataRepository.GetAsync(new long[] {log.Id});
-      if (result2.Count() != 3)
-        throw new InvalidOperationException($"Количество возвращённых записей неверное ({result2.Count()}).");
-      var key = result2.Last().Key;
-      if (key != "key3")
-        throw new InvalidOperationException($"Неверное значение key ({key}).");
-      await _logRepository.ClearAsync();
-      await _logDataRepository.ClearAsync();
       Assert.Pass("Тест пройден.");
     }
 

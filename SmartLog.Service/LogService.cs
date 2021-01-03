@@ -10,7 +10,6 @@ namespace SmartLog.Service
   public class LogService : ILogService
   {
     private readonly ILogRepository _logRepository;
-    private readonly ILogDataRepository _logDataRepository;
     private readonly ICustomAttributeRepository _customAttributeRepository;
     private readonly ILogTypeRepository _logTypeRepository;
 
@@ -34,11 +33,10 @@ namespace SmartLog.Service
     }
 
     public LogService(ILogRepository logRepository,
-      ILogDataRepository logDataRepository, ICustomAttributeRepository customAttributeRepository,
+      ICustomAttributeRepository customAttributeRepository,
       ILogTypeRepository logTypeRepository)
     {
       _logRepository = logRepository ?? throw new ArgumentNullException(nameof(logRepository));
-      _logDataRepository = logDataRepository ?? throw new ArgumentNullException(nameof(logDataRepository));
       _customAttributeRepository = customAttributeRepository ??
                                    throw new ArgumentNullException(nameof(customAttributeRepository));
       _logTypeRepository = logTypeRepository ?? throw new ArgumentNullException(nameof(logTypeRepository));
@@ -47,7 +45,7 @@ namespace SmartLog.Service
     public async Task<SmartLogResponse> CreateLogAsync(string type, string uid,
       string methodName, string createDate, string message)
     {
-      var guid = Guid.Parse(uid);
+      var guid = !string.IsNullOrEmpty(uid) ? Guid.Parse(uid) : Guid.Empty;
 
       try
       {
