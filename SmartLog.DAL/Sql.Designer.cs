@@ -79,8 +79,9 @@ namespace SmartLog.DAL {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to insert into [custom_attributes] ([logs_id], [name], [value])
-        ///values(@pLogsId, @pName, @pValue).
+        ///   Looks up a localized string similar to set @pCustomAttributesId = NEXT VALUE FOR [seq_custom_attributes]
+        ///insert into [custom_attributes] ([custom_attributes_id], [logs_id], [name], [value])
+        ///values(@pCustomAttributesId, @pLogsId, @pName, @pValue).
         /// </summary>
         internal static string InsertCustomAttributes {
             get {
@@ -89,8 +90,9 @@ namespace SmartLog.DAL {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to insert into [logs] ([create_date], [log_guid], [message], [method_name], [parent], [type])
-        ///values(@pCreateDate, @pLogGuid, @pMessage, @pMethodName, @pParent, @pType).
+        ///   Looks up a localized string similar to set @pLogsId = NEXT VALUE FOR [seq_logs]
+        ///insert into [logs] ([logs_id], [log_guid], [create_date], [type], [message], [method_name], [parent])
+        ///values (@pLogsId, @pLogGuid, @pCreateDate, @pType, @pMessage, @pMethodName, @pParent).
         /// </summary>
         internal static string InsertLogs {
             get {

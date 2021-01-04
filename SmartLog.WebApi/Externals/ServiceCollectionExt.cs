@@ -66,15 +66,13 @@ namespace SmartLog.WebApi.Externals
     {
       services.AddScoped<ILogRepository>(r =>
       {
-        var connector = r.GetService<IConnector>();
         var mapper = r.GetService<IMapper>();
-        return new LogRepository(connector, mapper);
+        return new LogRepository(mapper);
       });
       services.AddScoped<ICustomAttributeRepository>(r =>
       {
-        var connector = r.GetService<IConnector>();
         var mapper = r.GetService<IMapper>();
-        return new CustomAttributeRepository(connector, mapper);
+        return new CustomAttributeRepository(mapper);
       });
       services.AddScoped<ILogTypeRepository>(r =>
       {

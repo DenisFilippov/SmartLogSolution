@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Threading.Tasks;
 using AutoMapper;
 using Dapper;
@@ -11,55 +13,45 @@ namespace SmartLog.DAL.Repository
 {
   public class LogRepository : ILogRepository
   {
-    private readonly IConnector _connector;
     private readonly IMapper _mapper;
 
-    public LogRepository(IConnector connector, IMapper mapper)
+    public LogRepository(IMapper mapper)
     {
-      _connector = connector ?? throw new ArgumentNullException(nameof(connector));
       _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
     }
 
-    public async Task<IEnumerable<LogDto>> GetAsync(DateTime initial, DateTime final)
+    public async Task<IEnumerable<LogDto>> GetAsync(DateTime initial, DateTime final, SqlConnection connection)
     {
-      await using var connection = _connector.GetConnection();
       var entities = await connection.QueryAsync<LogEntity>(Sql.SelectLogs,
         new {pInitial = initial, pFinal = final});
 
       return _mapper.Map<IEnumerable<LogDto>>(entities);
     }
 
-    public async Task<int> InsertAsync(IEnumerable<LogDto> values)
+    public async Task<long> InsertAsync(LogDto value, SqlConnection connection, SqlTransaction transaction)
     {
-      await using var connection = _connector.GetConnection();
-      await using var transaction = connection.BeginTransaction();
-      var totalCount = 0;
-      foreach (var value in values)
-        try
-        {
-          totalCount += await connection.ExecuteAsync(Sql.InsertLogs,
-            new
-            {
-              pCreateDate = value.CreateDate, pLogGuid = value.Uid, pMessage = value.Message,
-              pMethodName = value.MethodName, pParent = value.Parent, pType = value.Type
-            },
-            transaction);
-        }
-        catch (Exception)
-        {
-          transaction.Rollback();
-          throw;
-        }
+      await using var command = new SqlCommand(Sql.InsertLogs, connection, transaction);
+      command.Parameters.AddWithValue("@pCreateDate", value.CreateDate);
+      command.Parameters.AddWithValue("@pLogGuid", value.Uid);
+      command.Parameters.AddWithValue("@pMessage", value.Message);
+      command.Parameters.AddWithValue("@pMethodName", value.MethodName);
+      command.Parameters.AddWithValue("@pParent", value.Parent);
+      command.Parameters.AddWithValue("@pType", value.Type);
+      command.Parameters.Add(new SqlParameter
+      {
+        ParameterName = "@pLogsId",
+        DbType = DbType.Int64,
+        Direction = ParameterDirection.Output
+      });
+      await command.ExecuteNonQueryAsync();
 
-      transaction.Commit();
-
-      return totalCount;
+      return (long)command.Parameters["@pLogsId"].Value;
     }
 
-    public async Task ClearAsync()
+    public async Task ClearAsync(SqlConnection connection)
     {
-      await using var connection = _connector.GetConnection();
-      await connection.ExecuteAsync(Sql.DeleteLogs);
+      await using var command = new SqlCommand(Sql.DeleteLogs, connection);
+      await command.ExecuteNonQueryAsync();
     }
   }
 }

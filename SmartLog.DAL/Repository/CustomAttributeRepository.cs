@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Threading.Tasks;
 using AutoMapper;
 using Dapper;
@@ -11,50 +13,40 @@ namespace SmartLog.DAL.Repository
 {
   public class CustomAttributeRepository : ICustomAttributeRepository
   {
-    private readonly IConnector _connector;
     private readonly IMapper _mapper;
 
-    public CustomAttributeRepository(IConnector connector, IMapper mapper)
+    public CustomAttributeRepository(IMapper mapper)
     {
-      _connector = connector ?? throw new ArgumentNullException(nameof(connector));
       _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
     }
 
-    public async Task<IEnumerable<CustomAttributeDto>> GetAsync(IEnumerable<long> logIds)
+    public async Task<IEnumerable<CustomAttributeDto>> GetAsync(IEnumerable<long> logIds, SqlConnection connection)
     {
-      await using var connection = _connector.GetConnection();
       var entities = await connection.QueryAsync<CustomAttributeEntity>(
         string.Format(Sql.SelectCustomAttributes, string.Join(',', logIds)));
 
       return _mapper.Map<IEnumerable<CustomAttributeDto>>(entities);
     }
 
-    public async Task<int> InsertAsync(IEnumerable<CustomAttributeDto> values)
+    public async Task<long> InsertAsync(CustomAttributeDto value, SqlConnection connection, SqlTransaction transaction)
     {
-      await using var connection = _connector.GetConnection();
-      await using var transaction = connection.BeginTransaction();
-      var totalCount = 0;
-      foreach (var value in values)
-        try
-        {
-          totalCount += await connection.ExecuteAsync(Sql.InsertCustomAttributes,
-            new {pLogsId = value.LogsId, pName = value.Name, pValue = value.Value},
-            transaction);
-        }
-        catch (Exception)
-        {
-          transaction.Rollback();
-          throw;
-        }
+      await using var command = new SqlCommand(Sql.InsertCustomAttributes, connection, transaction);
+      command.Parameters.AddWithValue("@pLogsId", value.LogsId);
+      command.Parameters.AddWithValue("@pName", value.Name);
+      command.Parameters.AddWithValue("@pValue", value.Value);
+      command.Parameters.Add(new SqlParameter
+      {
+        ParameterName = "@pCustomAttributesId",
+        DbType = DbType.Int64,
+        Direction = ParameterDirection.Output
+      });
+      await command.ExecuteNonQueryAsync();
 
-      transaction.Commit();
-
-      return totalCount;
+      return (long)command.Parameters["@pCustomAttributesId"].Value;
     }
 
-    public async Task ClearAsync()
+    public async Task ClearAsync(SqlConnection connection)
     {
-      await using var connection = _connector.GetConnection();
       await connection.ExecuteAsync(Sql.DeleteCustomAttributes);
     }
   }
