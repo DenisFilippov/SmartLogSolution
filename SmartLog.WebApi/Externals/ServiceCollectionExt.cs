@@ -74,7 +74,7 @@ namespace SmartLog.WebApi.Externals
         var mapper = r.GetService<IMapper>();
         return new CustomAttributeRepository(mapper);
       });
-      services.AddScoped<ILogTypeRepository>(r =>
+      services.AddSingleton<ILogTypeRepository>(r =>
       {
         var connector = r.GetService<IConnector>();
         var mapper = r.GetService<IMapper>();
@@ -89,10 +89,12 @@ namespace SmartLog.WebApi.Externals
     {
       services.AddScoped<ILogService>(r =>
       {
+        var connector = r.GetService<IConnector>();
+        var mapper = r.GetService<IMapper>();
         var logRepository = r.GetService<ILogRepository>();
         var customAttributeRepository = r.GetService<ICustomAttributeRepository>();
         var logTypeRepository = r.GetService<ILogTypeRepository>();
-        return new LogService(logRepository, customAttributeRepository, logTypeRepository);
+        return new LogService(connector, mapper, logRepository, customAttributeRepository, logTypeRepository);
       });
 
       return services;
