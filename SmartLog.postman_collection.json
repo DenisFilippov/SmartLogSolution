@@ -1,0 +1,176 @@
+{
+	"info": {
+		"_postman_id": "e6c5aedd-4c60-4e7b-88c8-cbb4f16fcada",
+		"name": "SmartLog",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "IIS service-info",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/api/smartlog/log/service-info",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"smartlog",
+						"log",
+						"service-info"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "IIS Express service-info",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:53946/log/service-info",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "53946",
+					"path": [
+						"log",
+						"service-info"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "IIS Express DEBUG",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:53946/log/debug?uid=D9E0C12D-1861-441B-B094-0CC20E83CDFF&methodname=execute1&createdate=2021-01-04T15:10:00&message=Привет, мир!!!",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "53946",
+					"path": [
+						"log",
+						"debug"
+					],
+					"query": [
+						{
+							"key": "uid",
+							"value": "D9E0C12D-1861-441B-B094-0CC20E83CDFF"
+						},
+						{
+							"key": "methodname",
+							"value": "execute1"
+						},
+						{
+							"key": "createdate",
+							"value": "2021-01-04T15:10:00"
+						},
+						{
+							"key": "message",
+							"value": "Привет, мир!!!"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "IIS Express Insert",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true,
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/xml"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<SmartLogRequest>\r\n    <Logs>\r\n        <Log>\r\n            <UId>9297766D-6317-4589-8B95-C8D468DFB78B</UId>\r\n            <MethodName>Execute1</MethodName>\r\n            <Type>Info</Type>\r\n            <CreateDate>2021-01-01T21:00:00</CreateDate>\r\n            <Message>Message 1</Message>\r\n        </Log>\r\n        <Log>\r\n            <UId>7407C74A-C826-41C0-8491-178D04B02202</UId>\r\n            <MethodName>Execute2</MethodName>\r\n            <Type>Warning</Type>\r\n            <CreateDate>2021-01-01T21:01:00</CreateDate>\r\n            <Message>Message 2</Message>\r\n            <CustomAttributes>\r\n                <CustomAttribute>\r\n                    <Name>Name1</Name>\r\n                    <Value>Value 1</Value>\r\n                </CustomAttribute>\r\n                <CustomAttribute>\r\n                    <Name>Name2</Name>\r\n                    <Value>Value 2</Value>\r\n                </CustomAttribute>\r\n            </CustomAttributes>\r\n        </Log>\r\n        <Log>\r\n            <UId>3CBD622D-A4EE-45EA-85A3-A031E7AB2BB1</UId>\r\n            <MethodName>Execute3</MethodName>\r\n            <Type>Error</Type>\r\n            <CreateDate>2021-01-01T21:03:00</CreateDate>\r\n            <Message>Message 3</Message>\r\n            <CustomAttributes>\r\n                <CustomAttribute>\r\n                    <Name>Name1</Name>\r\n                    <Value>Value 1</Value>\r\n                </CustomAttribute>\r\n                <CustomAttribute>\r\n                    <Name>Name2</Name>\r\n                    <Value>Value 2</Value>\r\n                </CustomAttribute>\r\n            </CustomAttributes>\r\n            <Children>\r\n                <Log>\r\n                    <UId>5B3F387E-73D4-46E7-B27F-71C27F447532</UId>\r\n                    <MethodName>Execute3</MethodName>\r\n                    <Type>Error</Type>\r\n                    <CreateDate>2021-01-01T21:03:00</CreateDate>\r\n                    <Message>Message 3</Message>\r\n                    <CustomAttributes>\r\n                        <CustomAttribute>\r\n                            <Name>Name3</Name>\r\n                            <Value>Value 3</Value>\r\n                        </CustomAttribute>\r\n                        <CustomAttribute>\r\n                            <Name>Name4</Name>\r\n                            <Value>Value 4</Value>\r\n                        </CustomAttribute>\r\n                    </CustomAttributes>\r\n                </Log>\r\n            </Children>\r\n        </Log>\r\n    </Logs>\r\n</SmartLogRequest>"
+				},
+				"url": {
+					"raw": "http://localhost:53946/log",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "53946",
+					"path": [
+						"log"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "IIS Express By date range",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/xml"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:53946/log/by-date-range?initial=2021-01-01 21:00:00&final=2021-01-01 21:03:00",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "53946",
+					"path": [
+						"log",
+						"by-date-range"
+					],
+					"query": [
+						{
+							"key": "initial",
+							"value": "2021-01-01 21:00:00"
+						},
+						{
+							"key": "final",
+							"value": "2021-01-01 21:03:00"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
