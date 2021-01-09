@@ -133,6 +133,13 @@ values(@pCustomAttributesId, @pLogsId, @pName, @pValue)</value>
 insert into [logs] ([logs_id], [log_guid], [create_date], [type], [message], [method_name], [parent])
 values (@pLogsId, @pLogGuid, @pCreateDate, @pType, @pMessage, @pMethodName, @pParent)</value>
   </data>
+  <data name="SelectByDateRange" xml:space="preserve">
+    <value>select l.[logs_id], l.[log_guid], l.[parent], l.[method_name], l.[type], 
+l.[create_date], l.[message], ca.[custom_attributes_id], ca.[name], ca.[value] from [logs] l
+left join [custom_attributes] ca on ca.logs_id = l.logs_id
+where l.[create_date] &gt;= @pInitial and l.[create_date] &lt;= @pFinal
+order by l.[logs_id]</value>
+  </data>
   <data name="SelectCustomAttributes" xml:space="preserve">
     <value>select [custom_attributes_id], [logs_id], [name], [value] from [custom_attributes] where[logs_id] in ({0})</value>
   </data>

@@ -33,11 +33,13 @@ namespace SmartLog.Domain.Dto
     [XmlArray("CustomAttributes")]
     [XmlArrayItem("CustomAttribute")]
     [JsonPropertyName("customAttribute")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public SmartCustomAttributeDto[] CustomAttributes { get; set; }
 
     [XmlArray("Children")]
     [XmlArrayItem("Log")]
     [JsonPropertyName("log")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public SmartLogDto[] Children { get; set; }
   }
 }

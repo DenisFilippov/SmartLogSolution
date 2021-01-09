@@ -101,6 +101,19 @@ namespace SmartLog.DAL {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to select l.[logs_id], l.[log_guid], l.[parent], l.[method_name], l.[type], 
+        ///l.[create_date], l.[message], ca.[custom_attributes_id], ca.[name], ca.[value] from [logs] l
+        ///left join [custom_attributes] ca on ca.logs_id = l.logs_id
+        ///where l.[create_date] &gt;= @pInitial and l.[create_date] &lt;= @pFinal
+        ///order by l.[logs_id].
+        /// </summary>
+        internal static string SelectByDateRange {
+            get {
+                return ResourceManager.GetString("SelectByDateRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to select [custom_attributes_id], [logs_id], [name], [value] from [custom_attributes] where[logs_id] in ({0}).
         /// </summary>
         internal static string SelectCustomAttributes {

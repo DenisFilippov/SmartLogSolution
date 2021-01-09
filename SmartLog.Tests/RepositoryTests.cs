@@ -23,6 +23,7 @@ namespace SmartLog.Tests
     private IMapper _mapper;
     private ILogRepository _logRepository;
     private ICustomAttributeRepository _customAttributeRepository;
+    private ISelectRepository _selectRepository;
 
     private static LogDto GetLogDto()
     {
@@ -56,6 +57,7 @@ namespace SmartLog.Tests
       _mapper = new Mapper(config);
       _logRepository = new LogRepository(_mapper);
       _customAttributeRepository = new CustomAttributeRepository(_mapper);
+      _selectRepository = new SelectRepository(_mapper);
       var entityMaps = FluentMapper.EntityMaps;
       if (entityMaps.Count == 0)
         FluentMapper.Initialize(c =>
@@ -63,6 +65,7 @@ namespace SmartLog.Tests
           c.AddMap(new LogEntityMap());
           c.AddMap(new CustomAttributeEntityMap());
           c.AddMap(new LogTypeEntityMap());
+          c.AddMap(new SelectEntityMap());
         });
     }
 
@@ -137,6 +140,17 @@ namespace SmartLog.Tests
 
       await _logRepository.ClearAsync(connection1);
       await _customAttributeRepository.ClearAsync(connection1);
+
+      Assert.Pass("Тест пройден.");
+    }
+
+    [Test]
+    public async Task SelectByDateRangeTestAsync()
+    {
+      await using var connection1 = _connector.GetConnection();
+      var initial = new DateTime(2021, 1, 1, 21, 0, 0);
+      var final = new DateTime(2021, 1, 1, 21, 3, 0);
+      var result = await _selectRepository.GetByDateRangeAsync(initial, final, connection1);
 
       Assert.Pass("Тест пройден.");
     }
