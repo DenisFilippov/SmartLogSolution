@@ -2,9 +2,9 @@
 using System.Text.Json.Serialization;
 using System.Xml.Serialization;
 
-namespace SmartLog.Domain.Dto
+namespace SmartLog.Core
 {
-  public class ErrorDto
+  public class SmartLogErrorDto
   {
     [XmlElement("UId")]
     [JsonPropertyName("uid")]

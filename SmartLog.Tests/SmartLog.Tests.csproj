@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SmartLog.Client\SmartLog.Client.csproj" />
     <ProjectReference Include="..\SmartLog.DAL\SmartLog.DAL.csproj" />
     <ProjectReference Include="..\SmartLog.Domain\SmartLog.Domain.csproj" />
     <ProjectReference Include="..\SmartLog.Mapping\SmartLog.Mapping.csproj" />

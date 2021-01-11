@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using AutoMapper;
+using SmartLog.Core;
 using SmartLog.DAL.Entities;
 using SmartLog.Domain.Dto;
 using SmartLog.Domain.Interfaces;

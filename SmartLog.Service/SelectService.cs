@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using SmartLog.Core;
 using SmartLog.Domain;
 using SmartLog.Domain.Dto;
 using SmartLog.Domain.Interfaces;
@@ -87,7 +88,7 @@ namespace SmartLog.Service
         return new SmartLogSelectResponse
         {
           Code = 200,
-          Error = null,
+          SmartLogError = null,
           Logs = logs.ToArray()
         };
       }
@@ -97,7 +98,7 @@ namespace SmartLog.Service
         {
           Code = 500,
           Logs = null,
-          Error = new ErrorDto
+          SmartLogError = new SmartLogErrorDto
           {
             Message = ex.Message,
             UId = ex.UId ?? Guid.Empty,
@@ -110,7 +111,7 @@ namespace SmartLog.Service
         {
           Code = 500,
           Logs = null,
-          Error = new ErrorDto
+          SmartLogError = new SmartLogErrorDto
           {
             Message = ex.Message,
             UId = Guid.Empty,

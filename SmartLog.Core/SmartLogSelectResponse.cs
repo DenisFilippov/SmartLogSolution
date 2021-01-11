@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using System.Xml.Serialization;
 
-namespace SmartLog.Domain.Dto
+namespace SmartLog.Core
 {
   [XmlRoot(nameof(SmartLogSelectResponse))]
   public class SmartLogSelectResponse : SmartLogResponse

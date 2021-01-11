@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
+using SmartLog.Core;
 
 namespace SmartLog.Tests
 {

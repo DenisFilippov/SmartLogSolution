@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using AutoMapper;
+using SmartLog.Core;
 using SmartLog.Domain;
 using SmartLog.Domain.Dto;
 using SmartLog.Domain.Interfaces;
@@ -25,12 +26,12 @@ namespace SmartLog.Service
         ? new SmartLogResponse
         {
           Code = code,
-          Error = null
+          SmartLogError = null
         }
         : new SmartLogResponse
         {
           Code = code,
-          Error = new ErrorDto
+          SmartLogError = new SmartLogErrorDto
           {
             UId = uid ?? Guid.Empty,
             Message = message

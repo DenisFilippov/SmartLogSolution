@@ -62,23 +62,19 @@ namespace SmartLog.Tests {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;SmartLogRequest&gt;
-        ///	&lt;Logs&gt;
-        ///		&lt;Log&gt;
-        ///			&lt;UId&gt;9297766D-6317-4589-8B95-C8D468DFB78B&lt;/UId&gt;
-        ///			&lt;MethodName&gt;Execute1&lt;/MethodName&gt;
-        ///			&lt;Type&gt;Info&lt;/Type&gt;
-        ///			&lt;CreateDate&gt;2021-01-01T21:00:00&lt;/CreateDate&gt;
-        ///			&lt;Message&gt;Message 1&lt;/Message&gt;
-        ///		&lt;/Log&gt;
-        ///		&lt;Log&gt;
-        ///			&lt;UId&gt;7407C74A-C826-41C0-8491-178D04B02202&lt;/UId&gt;
-        ///			&lt;MethodName&gt;Execute2&lt;/MethodName&gt;
-        ///			&lt;Type&gt;Warning&lt;/Type&gt;
-        ///			&lt;CreateDate&gt;2021-01-01T21:01:00&lt;/CreateDate&gt;
-        ///			&lt;Message&gt;Message 2&lt;/Message&gt;
-        ///			&lt;CustomAttributes&gt;
-        ///				&lt;CustomAttribute&gt;
-        ///					&lt;Name&gt;Name1&lt;/N [rest of string was truncated]&quot;;.
+        ///    &lt;Logs&gt;
+        ///        &lt;Log&gt;
+        ///            &lt;UId&gt;9297766D-6317-4589-8B95-C8D468DFB78B&lt;/UId&gt;
+        ///            &lt;MethodName&gt;Execute1&lt;/MethodName&gt;
+        ///            &lt;Type&gt;Info&lt;/Type&gt;
+        ///            &lt;CreateDate&gt;2021-01-01T21:00:00&lt;/CreateDate&gt;
+        ///            &lt;Message&gt;Message 1&lt;/Message&gt;
+        ///        &lt;/Log&gt;
+        ///        &lt;Log&gt;
+        ///            &lt;UId&gt;7407C74A-C826-41C0-8491-178D04B02202&lt;/UId&gt;
+        ///            &lt;MethodName&gt;Execute2&lt;/MethodName&gt;
+        ///            &lt;Type&gt;Warning&lt;/Type&gt;
+        ///            &lt;CreateDate&gt;2021-01-01T21:01:00&lt;/CreateDat [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string insert_request {
             get {
@@ -100,10 +96,10 @@ namespace SmartLog.Tests {
         /// <summary>
         ///   Looks up a localized string similar to &lt;SmartLogResponse&gt;
         ///	&lt;Code&gt;404&lt;/Code&gt;
-        ///	&lt;Error&gt;
+        ///	&lt;SmartLogError&gt;
         ///		&lt;UId&gt;51AB89D6-09DF-4C28-A0FF-061D0A8A6C45&lt;/UId&gt;
         ///		&lt;Message&gt;Not found.&lt;/Message&gt;
-        ///	&lt;/Error&gt;
+        ///	&lt;/SmartLogError&gt;
         ///&lt;/SmartLogResponse&gt;.
         /// </summary>
         internal static string response_404 {

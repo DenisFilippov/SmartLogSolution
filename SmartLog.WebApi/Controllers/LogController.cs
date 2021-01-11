@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel.Design;
 using System.Threading.Tasks;
+using SmartLog.Core;
 using SmartLog.Domain;
 using SmartLog.Domain.Dto;
 using SmartLog.Domain.Interfaces;

@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
+using SmartLog.Core;
 using SmartLog.Domain;
-using SmartLog.Domain.Dto;
 using SmartLog.Domain.Interfaces;
 
 namespace SmartLog.Host.Controllers

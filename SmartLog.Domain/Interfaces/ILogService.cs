@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using SmartLog.Core;
 using SmartLog.Domain.Dto;
 
 namespace SmartLog.Domain.Interfaces
